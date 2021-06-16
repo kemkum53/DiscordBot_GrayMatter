@@ -37,10 +37,10 @@ namespace Discord_GrayMatter_Bot.Commands
 
 
 
-        //[Command("deneme")]
-        //public async Task deneme(CommandContext ctx)
-        //{
-
-        //}
+        [Command("deneme")]
+        public async Task deneme(CommandContext ctx)
+        {
+            await ctx.Channel.SendMessageAsync("a");
+        }
     }
 }
