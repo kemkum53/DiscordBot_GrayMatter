@@ -1,4 +1,4 @@
-﻿using Discord_GrayMatter_Bot.Commands;
+﻿using DiscordBot_GrayMatter.Commands;
 using DSharpPlus;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.EventArgs;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Discord_GrayMatter_Bot
+namespace DiscordBot_GrayMatter
 {
     class Bot
     {
@@ -48,7 +48,7 @@ namespace Discord_GrayMatter_Bot
 
             Commands.RegisterCommands<UsualCommands>();
             Commands.RegisterCommands<ValorantCommands>();
-
+            Commands.RegisterCommands<FunCommands>();
             await Client.ConnectAsync();
             await Task.Delay(-1);
         }

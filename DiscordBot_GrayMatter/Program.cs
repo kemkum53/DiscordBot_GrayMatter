@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using DSharpPlus;
-namespace Discord_GrayMatter_Bot
+namespace DiscordBot_GrayMatter
 {
     class Program
     {

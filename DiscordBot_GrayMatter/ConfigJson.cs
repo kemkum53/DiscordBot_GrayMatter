@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Discord_GrayMatter_Bot
+namespace DiscordBot_GrayMatter
 {
     public struct ConfigJson
     {
