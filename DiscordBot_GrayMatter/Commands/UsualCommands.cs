@@ -1,4 +1,4 @@
-﻿using DSharpPlus.CommandsNext;
+﻿ using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DSharpPlus.Entities;
 
-namespace Discord_GrayMatter_Bot.Commands
+namespace DiscordBot_GrayMatter.Commands
 {
     public class UsualCommands : BaseCommandModule
     {

@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DSharpPlus.Entities;
 
-namespace Discord_GrayMatter_Bot.Commands
+namespace DiscordBot_GrayMatter.Commands
 {
     public class ValorantCommands : BaseCommandModule
     {
@@ -91,52 +91,79 @@ namespace Discord_GrayMatter_Bot.Commands
             await _message.ModifyAsync("Oyuncular: " + empty);
         }
 
+        [Command("çık")]
+        public async Task Cik(CommandContext ctx)
+        {
+            await ctx.Message.DeleteAsync();
+            if (_players.Contains(ctx.User.Username))
+            {
+                empty = "";
+                _players.Remove(ctx.User.Username);
+                if (_players.Count != 0)
+                {
+                    foreach (var i in _players)
+                    {
+                        empty += i + ", ";
+                    }
+                    empty = empty.Remove(empty.Length - 2);
+                }
+                await _message.ModifyAsync("Oyuncular: " + empty);
+            }
+        }
+
         [Command("belirle")]
         public async Task Belirle(CommandContext ctx)
         {
             await ctx.Message.DeleteAsync();
             Random rnd = new Random();
             int playerCount = _players.Count;
-            for (int i = 0; i < playerCount / 2; i++)
+            if (playerCount == 0)
             {
-                string a = _players[rnd.Next(_players.Count)];
-                _team1.Add(a);
-                _players.Remove(a);
+                await ctx.Channel.SendMessageAsync("Yeteri kadar oyuncu yok!");
             }
+            else
+            {
+                for (int i = 0; i < playerCount / 2; i++)
+                {
+                    string a = _players[rnd.Next(_players.Count)];
+                    _team1.Add(a);
+                    _players.Remove(a);
+                }
 
-            foreach (var i in _players)
-            {
-                _team2.Add(i);
-            }
+                foreach (var i in _players)
+                {
+                    _team2.Add(i);
+                }
 
-            _players.Clear();
-            string team1 = "";
-            string team2 = "";
-            foreach (var i in _team1)
-            {
-                team1 += i + ", ";
-            }
-            foreach (var i in _team2)
-            {
-                team2 += i + ", ";
-            }
-            team1 = team1.Remove(team1.Length - 2);
-            team2 = team2.Remove(team2.Length - 2);
-            await _message.Channel.SendMessageAsync("Takım1: " + team1 + "\nTakım2: " + team2);
+                _players.Clear();
+                string team1 = "";
+                string team2 = "";
+                foreach (var i in _team1)
+                {
+                    team1 += i + ", ";
+                }
+                foreach (var i in _team2)
+                {
+                    team2 += i + ", ";
+                }
+                team1 = team1.Remove(team1.Length - 2);
+                team2 = team2.Remove(team2.Length - 2);
+                await _message.Channel.SendMessageAsync("Takım1: " + team1 + "\nTakım2: " + team2);
 
-            //temizleme
-            _players = new List<string>();
-            _team1 = new List<string>();
-            _team2 = new List<string>();
-            first = true;
+                //temizleme
+                _players = new List<string>();
+                _team1 = new List<string>();
+                _team2 = new List<string>();
+                first = true;
+            }
         }
 
         [Command("sıfırla")]
         public async Task Sifirla(CommandContext ctx)
         {
             await ctx.Message.DeleteAsync();
-            _players = new List<string>(); 
-            _team1 = new List<string>(); 
+            _players = new List<string>();
+            _team1 = new List<string>();
             _team2 = new List<string>();
             first = true;
             await _message.DeleteAsync();
