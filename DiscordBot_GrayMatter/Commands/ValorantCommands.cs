@@ -16,6 +16,7 @@ namespace DiscordBot_GrayMatter.Commands
         private List<string> _players = new List<string>();
         private List<string> _team1 = new List<string>();
         private List<string> _team2 = new List<string>();
+        private DiscordEmbedBuilder _eb;
         private DiscordMessage _message;
         private string empty;
         private bool first = true;
@@ -50,7 +51,13 @@ namespace DiscordBot_GrayMatter.Commands
             if (first)
             {
                 _players.Add(ctx.User.Username);
-                await ctx.Channel.SendMessageAsync("Oyuncular: " + ctx.User.Username);
+                _eb = new DiscordEmbedBuilder()
+                {
+                    Color = DiscordColor.Blue,
+                    Title = "Oyuncular",
+                    Description = ctx.User.Username
+                };
+                await ctx.Channel.SendMessageAsync(_eb);
                 _message = (await ctx.Channel.GetMessagesAsync(1))[0];
                 first = false;
             }
@@ -66,7 +73,10 @@ namespace DiscordBot_GrayMatter.Commands
                     empty += i + ", ";
                 }
                 empty = empty.Remove(empty.Length - 2);
-                await _message.ModifyAsync("Oyuncular: " + empty);
+                _eb.Description = empty;
+                await _message.DeleteAsync();
+                await ctx.Channel.SendMessageAsync(_eb);
+                _message = (await ctx.Channel.GetMessagesAsync(1))[0];
             }
         }
         [Command("katıl")]
@@ -88,7 +98,10 @@ namespace DiscordBot_GrayMatter.Commands
                 empty += i + ", ";
             }
             empty = empty.Remove(empty.Length - 2);
-            await _message.ModifyAsync("Oyuncular: " + empty);
+            _eb.Description = empty;
+            await _message.DeleteAsync();
+            await ctx.Channel.SendMessageAsync(_eb);
+            _message = (await ctx.Channel.GetMessagesAsync(1))[0];
         }
 
         [Command("çık")]
@@ -107,7 +120,10 @@ namespace DiscordBot_GrayMatter.Commands
                     }
                     empty = empty.Remove(empty.Length - 2);
                 }
-                await _message.ModifyAsync("Oyuncular: " + empty);
+                _eb.Description = empty;
+                await _message.DeleteAsync();
+                await ctx.Channel.SendMessageAsync(_eb);
+                _message = (await ctx.Channel.GetMessagesAsync(1))[0];
             }
         }
 
@@ -148,12 +164,20 @@ namespace DiscordBot_GrayMatter.Commands
                 }
                 team1 = team1.Remove(team1.Length - 2);
                 team2 = team2.Remove(team2.Length - 2);
-                await _message.Channel.SendMessageAsync("Takım1: " + team1 + "\nTakım2: " + team2);
+                _eb = new DiscordEmbedBuilder()
+                {
+                    Color = DiscordColor.Purple,
+                    Title = "TAKIMLAR",
+                };
+                _eb.AddField("Takım1", team1, false);
+                _eb.AddField("Takım2", team2, false);
+                await _message.Channel.SendMessageAsync(_eb);
 
                 //temizleme
                 _players = new List<string>();
                 _team1 = new List<string>();
                 _team2 = new List<string>();
+                _eb = new DiscordEmbedBuilder();
                 first = true;
             }
         }
@@ -165,6 +189,7 @@ namespace DiscordBot_GrayMatter.Commands
             _players = new List<string>();
             _team1 = new List<string>();
             _team2 = new List<string>();
+            _eb = new DiscordEmbedBuilder();
             first = true;
             await _message.DeleteAsync();
             await ctx.Channel.SendMessageAsync("Oyuncular sıfırlandı!");
