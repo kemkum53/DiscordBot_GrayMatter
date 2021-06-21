@@ -11,12 +11,6 @@ namespace DiscordBot_GrayMatter.Commands
 {
     public class UsualCommands : BaseCommandModule
     {
-        //[Command("ping")]
-        //public async Task Ping(CommandContext ctx)
-        //{
-        //    await ctx.Channel.SendMessageAsync("pong").ConfigureAwait(false);
-        //}
-
         [Command("dice")]
         public async Task Dice(CommandContext ctx, int dice)
         {
@@ -31,16 +25,10 @@ namespace DiscordBot_GrayMatter.Commands
             await ctx.Channel.DeleteMessagesAsync(messages);
         }
 
-        //[Command("reactiontorole")]
-        //public async Task Role(CommandContext ctx, DiscordChannel ch, string msg)
-
-
-
-
-        [Command("deneme")]
-        public async Task deneme(CommandContext ctx)
-        {
-            await ctx.Channel.SendMessageAsync("a");
-        }
+        //[Command("deneme")]
+        //public async Task deneme(CommandContext ctx)
+        //{
+        //    await ctx.Channel.SendMessageAsync("a");
+        //}
     }
 }

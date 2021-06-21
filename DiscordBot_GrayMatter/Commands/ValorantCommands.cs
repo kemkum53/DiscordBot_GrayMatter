@@ -194,6 +194,5 @@ namespace DiscordBot_GrayMatter.Commands
             await _message.DeleteAsync();
             await ctx.Channel.SendMessageAsync("Oyuncular sıfırlandı!");
         }
-
     }
 }
