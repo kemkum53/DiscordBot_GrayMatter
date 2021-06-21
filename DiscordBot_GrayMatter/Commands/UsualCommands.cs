@@ -15,7 +15,7 @@ namespace DiscordBot_GrayMatter.Commands
         public async Task Dice(CommandContext ctx, int dice)
         {
             Random rnd = new Random();
-            await ctx.Channel.SendMessageAsync("Result: " + rnd.Next(1,dice+1).ToString()).ConfigureAwait(false);
+            await ctx.Channel.SendMessageAsync("Result: " + rnd.Next(1,dice + 1).ToString()).ConfigureAwait(false);
         }
 
         [Command("clear")]
