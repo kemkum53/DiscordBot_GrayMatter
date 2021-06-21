@@ -15,7 +15,7 @@ namespace DiscordBot_GrayMatter.Commands
         public async Task Dice(CommandContext ctx, int dice)
         {
             Random rnd = new Random();
-            await ctx.Channel.SendMessageAsync("Result: " + rnd.Next(dice).ToString()).ConfigureAwait(false);
+            await ctx.Channel.SendMessageAsync("Result: " + rnd.Next(1,dice+1).ToString()).ConfigureAwait(false);
         }
 
         [Command("clear")]
@@ -25,10 +25,20 @@ namespace DiscordBot_GrayMatter.Commands
             await ctx.Channel.DeleteMessagesAsync(messages);
         }
 
-        //[Command("deneme")]
-        //public async Task deneme(CommandContext ctx)
-        //{
-        //    await ctx.Channel.SendMessageAsync("a");
-        //}
+        [Command("avatar")]
+        public async Task Avatar(CommandContext ctx, DiscordUser user)
+        {
+
+        }
+
+
+        [Command("deneme")]
+        public async Task deneme(CommandContext ctx)
+        {
+            foreach (var x in ctx.Guild.Members.Values)
+            {
+                await ctx.Channel.SendMessageAsync(x.ToString());
+            }
+        }
     }
 }
