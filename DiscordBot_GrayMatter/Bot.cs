@@ -49,7 +49,6 @@ namespace DiscordBot_GrayMatter
             Commands.RegisterCommands<UsualCommands>();
             Commands.RegisterCommands<ValorantCommands>();
             Commands.RegisterCommands<FunCommands>();
-            Commands.RegisterCommands<RoleCommands>();
             await Client.ConnectAsync();
             await Task.Delay(-1);
         }
