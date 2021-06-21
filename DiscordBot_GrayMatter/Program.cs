@@ -9,6 +9,7 @@ namespace DiscordBot_GrayMatter
         {
             var bot = new Bot();
             bot.RunAsync().GetAwaiter().GetResult();
+            int a;
         }
     }
 }
